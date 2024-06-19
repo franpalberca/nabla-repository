@@ -20,6 +20,7 @@ type Auth0Config = {
 	client_origin: string | undefined;
 	audience: string | undefined;
 	issuer: string | undefined;
+	token: string | undefined;
 }
 
 type CloudinaryConfig = {
@@ -44,7 +45,8 @@ const CONFIG: TConfig = {
 		auth0: {
 			client_origin: process.env.APP_ORIGIN,
 			audience: process.env.AUTH0_AUDIENCE,
-			issuer: process.env.AUTH0_ISSUER
+			issuer: process.env.AUTH0_ISSUER,
+			token: process.env.AUTH0_TOKEN
 		},
 		cloudinary: {
 
@@ -60,7 +62,8 @@ const CONFIG: TConfig = {
 		auth0: {
 			client_origin: process.env.APP_ORIGIN,
 			audience: process.env.AUTH0_AUDIENCE,
-			issuer: process.env.AUTH0_ISSUER
+			issuer: process.env.AUTH0_ISSUER,
+			token: process.env.AUTH0_TOKEN
 		},
 		cloudinary: {
 
