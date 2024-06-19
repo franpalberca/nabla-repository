@@ -1,9 +1,12 @@
+import { Router } from "./router/RouterPaths.routes"
+
+
 function App() {
 
 
   return (
     <>
-      Hola
+      <Router />
     </>
   )
 }
