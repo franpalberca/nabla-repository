@@ -25,10 +25,10 @@ app.use(
 	})
 );
 const addUserToRequest = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-	if (req.auth?.payload && typeof req.auth.payload.email === 'string') {
-		req.user = {email: req.auth.payload.email};
-	}
-	next();
+    if (req.auth?.payload && typeof req.auth.payload.email === 'string') {
+        req.user = { email: req.auth.payload.email, id: req.auth.payload.id };
+    }
+    next();
 };
 app.use(authenticateJWT);;
 app.use(addUserToRequest);

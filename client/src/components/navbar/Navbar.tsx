@@ -3,13 +3,14 @@ import {Button} from 'react-bootstrap';
 import Navbar from 'react-bootstrap/Navbar';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { LANDING, SIGNUP, USERPAGE } from '../../config/routes/paths';
+import { LANDING, LOGIN, USERPAGE } from '../../config/routes/paths';
 import { AuthContext } from '../../config/context/AuthContext';
 
 export const NavbarComponent = () => {
 
 	const { user, logout } = useContext(AuthContext)
 	const navigate = useNavigate()
+    console.log(user)
 
 	const handleLogout = () => {
         logout();
@@ -32,7 +33,7 @@ export const NavbarComponent = () => {
 				) : (
 					<div className="navbar_data">
 						<p className="log_text">Please, sign in</p>
-						<Button className="log_button" onClick={() => navigate(SIGNUP)}>
+						<Button className="log_button" onClick={() => navigate(LOGIN)}>
 							Login
 						</Button>
 					</div>

@@ -9,12 +9,15 @@ export const authenticateJWT = (req: Request, res: Response, next: NextFunction)
 		return res.status(401).send({error: 'No token provided'});
 	}
 
-	jwt.verify(token, process.env.JWT_SECRET!, (err, user) => {
-		if (err) {
-			return res.status(403).send({error: 'Failed to authenticate token'});
-		}
+	try {
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET!) as { email: string; id: string };
 
-		(req as AuthenticatedRequest).user = user as {email: string};
-		next();
-	});
+    // Assign user to the request
+    (req as AuthenticatedRequest).user = { email: decodedToken.email, id: decodedToken.id };
+
+    next();
+} catch (err) {
+    console.error(err);
+    return res.status(403).send({ error: 'Failed to authenticate token' });
+}
 };

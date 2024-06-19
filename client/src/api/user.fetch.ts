@@ -48,3 +48,32 @@ export const getUser = async (userData: UserDataI) => {
 		console.error(error);
 	}
 }
+
+export const getUserById = async (userId: string) => {
+    try {
+        const token = getToken();
+        if (!token) {
+            throw new Error('No token found');
+        }
+        console.log('Token:', token);
+        const response = await fetch(`${urlUser}/${userId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error(`HTTP error! Status: ${response.status}, Message: ${errorText}`);
+            throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorText}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching user by ID:', error);
+        throw error;
+    }
+};

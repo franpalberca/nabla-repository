@@ -1,7 +1,6 @@
 import {Request, Response} from 'express';
 import prisma from '../db/clientPrisma';
 import {uploadImage} from '../utils/cloudinary';
-import {v4 as uuidv4} from 'uuid';
 import { AuthenticatedRequest } from '../types/types';
 import bcrypt from 'bcrypt'
 
@@ -89,34 +88,36 @@ export const loginUser = async (req: Request, res: Response) => {
     }
 };
 
-export const getUserByEmail = async (req: AuthenticatedRequest, res: Response) => {
-	const {userEmail} = req.params;
+export const getUserById = async (req: AuthenticatedRequest, res: Response) => {
+    const { userId } = req.params;
 
-	try {
-		if (req.user?.email !== userEmail) {
-			return res.status(403).send({error: 'Unauthorized access'});
-		}
-		const userById = await prisma.user.findUnique({
-			where: {
-				userEmail: userEmail,
-			},
-			select: {
-				userId: true,
-				userName: true,
-				userImage: true,
-			},
-		});
-		if (!userById) {
-			return res.status(404).send({error: 'User not found'});
-		}
+    try {
+        if (req.user?.id !== userId) {
+            return res.status(403).send({ error: 'Unauthorized access' });
+        }
 
-		return res.status(200).send(userById);
-	} catch (err) {
-		console.error(err);
-		return res.status(500).send({error: 'Internal server error'});
-	}
+        const userById = await prisma.user.findUnique({
+            where: {
+                userId: userId,
+            },
+            select: {
+                userId: true,
+                userName: true,
+                userImage: true,
+				userEmail: true,
+            },
+        });
+
+        if (!userById) {
+            return res.status(404).send({ error: 'User not found' });
+        }
+
+        return res.status(200).send(userById);
+    } catch (error) {
+        console.error('Error retrieving user by ID:', error);
+        return res.status(500).send({ error: 'Internal server error' });
+    }
 };
-
 export const getAllUsers = async (req: Request, res: Response) => {
 	try {
 		const allUsers = await prisma.user.findMany();

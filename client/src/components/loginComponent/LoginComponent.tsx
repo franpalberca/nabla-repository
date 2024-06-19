@@ -3,14 +3,14 @@ import {Button, Form} from 'react-bootstrap';
 import styled from 'styled-components';
 import {getUser} from '../../api/user.fetch';
 import {useNavigate} from 'react-router-dom';
-import {USERPAGE, SIGNUP} from '../../config/routes/paths';
+import {SIGNUP} from '../../config/routes/paths';
 import { AuthContext } from '../../config/context/AuthContext';
 
 const LoginComponent = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const navigate = useNavigate();
-    const { setUser } = useContext(AuthContext);
+    const { login } = useContext(AuthContext);
 
 	const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setEmail(e.target.value);
@@ -31,8 +31,8 @@ const LoginComponent = () => {
             const response = await getUser(userData);
 
 			if (response && response.user) {
-				setUser(response.user);
-                navigate(USERPAGE);
+                login(response.user, response.token)
+                navigate(`/private/${response.user.userId}`);
 			} else {
 				console.error('Error al iniciar sesión');
 			}

@@ -1,10 +1,11 @@
 import {createContext, useState, ReactNode, Dispatch, SetStateAction} from 'react';
 
 interface UserI {
-	id: string;
+	userId: string;
 	userEmail: string;
 	userName?: string | null;
 	userPassword?: string | null;
+    userImage?: string | null;
 	userCreatedAt: string;
 	userUpdatedAt: string;
 }
@@ -12,13 +13,15 @@ interface UserI {
 interface AuthContextTypeI {
 	user: UserI | null;
 	setUser: Dispatch<SetStateAction<UserI | null>>;
-	logout: () => void;
+	login: (user: UserI, token: string) => void;
+    logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextTypeI>({
 	user: null,
 	setUser: () => {},
-	logout: () => {},
+	login: () => {},
+    logout: () => {},
 });
 
 interface AuthProviderProps {
@@ -26,12 +29,23 @@ interface AuthProviderProps {
 }
 
 const AuthProvider = ({children}: AuthProviderProps) => {
-	const [user, setUser] = useState<UserI | null>(null);
-	const logout = () => {
-		setUser(null);
-	};
+    const [user, setUser] = useState<UserI | null>(null);
 
-	return <AuthContext.Provider value={{user, setUser, logout}}>{children}</AuthContext.Provider>;
+    const login = (user: UserI, token: string) => {
+        setUser(user);
+        localStorage.setItem('token', token);
+    };
+
+    const logout = () => {
+        setUser(null);
+        localStorage.removeItem('token');
+    };
+
+    return (
+        <AuthContext.Provider value={{ user, setUser, login, logout }}>
+            {children}
+        </AuthContext.Provider>
+    );
 };
 
-export {AuthContext, AuthProvider};
+export { AuthContext, AuthProvider };
