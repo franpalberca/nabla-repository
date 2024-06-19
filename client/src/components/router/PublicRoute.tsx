@@ -1,14 +1,15 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
 import { HOME } from '../../config/routes/paths';
+import { useContext } from 'react';
+import { AuthContext } from '../../config/context/AuthContext';
 
 export const PublicRoute = () => {
-    const {isAuthenticated} = useAuth0();
+    const {user} = useContext(AuthContext);
 
-    if (isAuthenticated) {
+    if (user) {
         return <Navigate to={HOME} />;
     }
-    
+
     return (
         <div>
             <Outlet />

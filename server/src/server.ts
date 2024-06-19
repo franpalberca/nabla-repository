@@ -4,8 +4,8 @@ import morgan from 'morgan';
 import errorHandler from './middleware/errorHandler';
 import userRoutes from './routes/user.routes';
 import fileUpload from 'express-fileupload';
-import { checkJwtMiddleware } from './middleware/checkjwt.middleware';
 import { AuthenticatedRequest } from './types/types';
+import { authenticateJWT } from './middleware/authenticateJWT';
 
 const APP_ORIGIN = process.env.APP_ORIGIN || 'http://localhost:5173';
 const app: Express = express();
@@ -30,7 +30,7 @@ const addUserToRequest = (req: AuthenticatedRequest, res: Response, next: NextFu
 	}
 	next();
 };
-app.use(checkJwtMiddleware);
+app.use(authenticateJWT);;
 app.use(addUserToRequest);
 
 export default app;

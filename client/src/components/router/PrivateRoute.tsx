@@ -1,13 +1,10 @@
 import {Navigate, Outlet} from 'react-router-dom';
-import {useAuth0} from '@auth0/auth0-react';
 import {LANDING} from '../../config/routes/paths';
+import { useContext } from 'react';
+import { AuthContext } from '../../config/context/AuthContext';
 
 export const PrivateRoute = () => {
-	const {isAuthenticated, user} = useAuth0();
-
-	if (!isAuthenticated) {
-		return <div>Loading ...</div>;
-	}
+	const {user} = useContext(AuthContext);
 
 	return (
 		<>

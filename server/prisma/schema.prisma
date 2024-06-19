@@ -13,6 +13,7 @@ datasource db {
 model User {
     userId        String   @id @default(auto()) @map("_id") @db.ObjectId
     userEmail     String   @unique
+    userPassword  String
     userName      String?
     userImage     String?
     userCreatedAt DateTime @default(now())

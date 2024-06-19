@@ -1,35 +1,22 @@
-import {NextFunction, Request, Response} from 'express'
-import {InsufficientScopeError, InvalidTokenError, UnauthorizedError,} from "express-oauth2-jwt-bearer";
+import { NextFunction, Request, Response } from 'express';
+import jwt, { JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken';
 
-const errorHandler = async (error: any, req: Request, response: Response, next: NextFunction) => {
-    if (error instanceof InsufficientScopeError) {
-        const message = "Permission denied";
-
-        response.status(error.status).json({message});
-
-        return;
+const errorHandler = (error: any, req: Request, res: Response, next: NextFunction) => {
+    if (error instanceof JsonWebTokenError) {
+        if (error instanceof TokenExpiredError) {
+            return res.status(401).json({ error: 'Token expired' });
+        } else {
+            return res.status(401).json({ error: 'Invalid token' });
+        }
     }
 
-    if (error instanceof InvalidTokenError) {
-        const message = "Bad credentials";
-
-        response.status(error.status).json({message});
-
-        return;
+    // Handle other custom errors if needed
+    if (error instanceof Error) {
+        return res.status(500).json({ error: error.message });
     }
 
-    if (error instanceof UnauthorizedError) {
-        const message = "Requires authentication";
+    // Fallback to generic error handling
+    return res.status(500).json({ error: 'Internal server error' });
+};
 
-        response.status(error.status).json({message});
-
-        return;
-    }
-
-    const status = 500;
-    const message = "Internal Server Error";
-
-    response.status(status).json({message});
-}
-
-export default errorHandler
+export default errorHandler;
