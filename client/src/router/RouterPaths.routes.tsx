@@ -1,7 +1,9 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {HOME, LANDING, LOGIN, SIGNUP, USERPAGE} from '../config/routes/paths';
-import {HomePage, LandingPage, UserPage, LoginPage, SignUpPage} from '../pages';
+import {ADMIN, HOME, LANDING, LOGIN, SIGNUP, UNAUTHORIZED, USERPAGE} from '../config/routes/paths';
+import {HomePage, LandingPage, UserPage, LoginPage, SignUpPage, UnauthorizedPage} from '../pages';
 import { PrivateRoute, PublicRoute } from '../components/router';
+import { AdminPage } from '../pages/AdminPage';
+import { ProtectedAdminRoute } from '../components/router/AdminRoute';
 
 export const Router = () => {
 	return (
@@ -16,6 +18,8 @@ export const Router = () => {
 					<Route index element={<HomePage />}></Route>
 					<Route path={USERPAGE} element={<UserPage />}></Route>
 				</Route>
+                <Route path={ADMIN} element={<ProtectedAdminRoute><AdminPage /></ProtectedAdminRoute>} />
+                <Route path={UNAUTHORIZED} element={<UnauthorizedPage />} />
 			</Routes>
 		</BrowserRouter>
 	);

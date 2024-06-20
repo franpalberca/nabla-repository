@@ -3,7 +3,7 @@ import {Button} from 'react-bootstrap';
 import Navbar from 'react-bootstrap/Navbar';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { LANDING, LOGIN, SIGNUP } from '../../config/routes/paths';
+import { ADMIN, LANDING, LOGIN, SIGNUP } from '../../config/routes/paths';
 import { AuthContext } from '../../config/context/AuthContext';
 
 export const NavbarComponent = () => {
@@ -21,6 +21,9 @@ export const NavbarComponent = () => {
 				{user ? (
 					<div className="navbar_data">
 						<p className="log_text">Welcome, {user.userName}</p>
+                        <Button className="log_button_admin" onClick={() => navigate(ADMIN)}>
+							Admin
+						</Button>
 						<Button className="log_button" onClick={handleLogout}>
 							Logout
 						</Button>
@@ -67,6 +70,7 @@ const NavbarStyles = styled.div`
 		background-color: black;
 		border-color: black;
 	}
+        & .log_button_admin,
         & .log_button_register{
         grid-area: 1 / 4 / 2 / 5;
 		width: 15vh;

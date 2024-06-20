@@ -1,6 +1,5 @@
 import {setToken} from '../utils/auth';
 
-
 const urlUser = import.meta.env.VITE_API_URL_USER;
 
 interface BodyDataI {
@@ -53,9 +52,9 @@ export const getUser = async (userData: UserDataI) => {
 
 export const updateUser = async (userId: string, formData: FormData, token: string | null) => {
 	try {
-        if (!token) {
-            throw new Error('No token found');
-        }
+		if (!token) {
+			throw new Error('No token found');
+		}
 		const response = await fetch(`${urlUser}/${userId}`, {
 			method: 'PATCH',
 			mode: 'cors',
@@ -72,23 +71,38 @@ export const updateUser = async (userId: string, formData: FormData, token: stri
 };
 
 export const deleteUser = async (userId: string, token: string | null) => {
-    try {
-        if (!token) {
-            throw new Error('No token found');
-        }
-        const response = await fetch(`${urlUser}/${userId}`, {
+	try {
+		if (!token) {
+			throw new Error('No token found');
+		}
+		const response = await fetch(`${urlUser}/${userId}`, {
 			method: 'DELETE',
 			mode: 'cors',
 			headers: {
 				authorization: `Bearer ${token}`,
 			},
 		});
-        if (!response.ok) {
-            throw new Error('Error deleting user');
-        }
+		if (!response.ok) {
+			throw new Error('Error deleting user');
+		}
 
-        return response.json();
-    } catch (error) {
-        console.error('Error deleting user:', error);
-    }
-}
+		return response.json();
+	} catch (error) {
+		console.error('Error deleting user:', error);
+	}
+};
+
+export const getAllUsers = async (token: string) => {
+	try {
+		const response = await fetch(`${urlUser}/all-users`, {
+			method: 'GET',
+			mode: 'cors',
+			headers: {
+				authorization: `Bearer ${token}`,
+			},
+		});
+		return response;
+	} catch (error) {
+		console.error('Error fetching users:', error);
+	}
+};

@@ -10,6 +10,7 @@ interface UserI {
     userImage?: string | null;
 	userCreatedAt: string;
 	userUpdatedAt: string;
+    isAdmin: boolean;
 }
 
 interface AuthContextTypeI {
