@@ -78,7 +78,7 @@ export const UserComponent = () => {
 							<p>User ID: {user.userId}</p>
 							<p>Email: {user.userEmail}</p>
 							<p>Name: {user.userName}</p>
-							<Image src={user.userImage ?? undefined} rounded />
+							<Image className='image' src={user.userImage ?? undefined} rounded />
 							<div className='userButtons'>
                             <p>Add picture:</p>
 							<input type="file" accept="image/*" onChange={handlePictureChange} />
@@ -117,4 +117,7 @@ const UserComponentStyles = styled.div`
     }
     & .buttonUpdate {
     margin-top: 2vh;
+    }
+    & .image{
+    max-width: 60vh;
     }`;
