@@ -1,4 +1,6 @@
 import {createContext, useState, ReactNode, Dispatch, SetStateAction} from 'react';
+import { getToken, removeToken, setToken } from '../../utils/auth';
+
 
 interface UserI {
 	userId: string;
@@ -13,6 +15,7 @@ interface UserI {
 interface AuthContextTypeI {
 	user: UserI | null;
 	setUser: Dispatch<SetStateAction<UserI | null>>;
+    tokenState: string | null;
 	login: (user: UserI, token: string) => void;
     logout: () => void;
 }
@@ -20,6 +23,7 @@ interface AuthContextTypeI {
 const AuthContext = createContext<AuthContextTypeI>({
 	user: null,
 	setUser: () => {},
+    tokenState: null,
 	login: () => {},
     logout: () => {},
 });
@@ -30,19 +34,22 @@ interface AuthProviderProps {
 
 const AuthProvider = ({children}: AuthProviderProps) => {
     const [user, setUser] = useState<UserI | null>(null);
+    const [tokenState, setTokenState] = useState<string | null>(getToken())
 
     const login = (user: UserI, token: string) => {
         setUser(user);
-        localStorage.setItem('token', token);
+        setToken(token);
+        setTokenState(token)
     };
 
     const logout = () => {
         setUser(null);
-        localStorage.removeItem('token');
+        removeToken();
+        setTokenState(null);
     };
 
     return (
-        <AuthContext.Provider value={{ user, setUser, login, logout }}>
+        <AuthContext.Provider value={{ user, setUser, tokenState, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

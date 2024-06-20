@@ -4,13 +4,13 @@ import styled from 'styled-components';
 import {getUser} from '../../api/user.fetch';
 import {useNavigate} from 'react-router-dom';
 import {SIGNUP} from '../../config/routes/paths';
-import { AuthContext } from '../../config/context/AuthContext';
+import {AuthContext} from '../../config/context/AuthContext';
 
 const LoginComponent = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const navigate = useNavigate();
-    const { login } = useContext(AuthContext);
+	const {login} = useContext(AuthContext);
 
 	const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setEmail(e.target.value);
@@ -28,11 +28,12 @@ const LoginComponent = () => {
 			userPassword: password,
 		};
 		try {
-            const response = await getUser(userData);
+			const response = await getUser(userData);
+			console.log('Login response:', response);
 
 			if (response && response.user) {
-                login(response.user, response.token)
-                navigate(`/private/${response.user.userId}`);
+				login(response.user, response.token);
+				navigate(`/private/${response.user.userId}`);
 			} else {
 				console.error('Error al iniciar sesión');
 			}
@@ -49,7 +50,7 @@ const LoginComponent = () => {
 					<Form.Control type="email" placeholder="Enter your email" value={email} onChange={handleEmailChange} required />
 				</Form.Group>
 
-				<Form.Group className='group_form' controlId="password">
+				<Form.Group className="group_form" controlId="password">
 					<Form.Label>Password:</Form.Label>
 					<Form.Control type="password" placeholder="Enter your password" value={password} onChange={handlePasswordChange} required />
 				</Form.Group>
@@ -77,9 +78,9 @@ const FormStyles = styled.div`
 		width: 70vh;
 	}
 
-    & .group_form{
-        margin-top:3vh;
-    }
+	& .group_form {
+		margin-top: 3vh;
+	}
 
 	& .form_button {
 		background-color: black;

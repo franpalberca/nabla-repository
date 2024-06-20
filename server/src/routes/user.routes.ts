@@ -1,14 +1,15 @@
 import { Router } from 'express';
-import { createUser, loginUser, getUserById, deleteUserById, getAllUsers, updateUserById } from '../controllers/user.controller';
+import { createUser, loginUser, deleteUserById, getAllUsers, updateUserById } from '../controllers/user.controller';
+import { authenticateJWT } from '../middleware/authenticateJWT';
+import { upload } from '../config/multer';
 
 const userRoutes = Router();
 
 userRoutes
     .post('/', createUser)
     .post('/login', loginUser)
-    .get('/:userId', getUserById)
     .get('/', getAllUsers)
-    .patch('/:userId', updateUserById)
-    .delete('/:userId', deleteUserById);
+    .patch('/:userId', authenticateJWT, upload.single('userImage'), updateUserById)
+    .delete('/:userId', authenticateJWT, deleteUserById);
 
 export default userRoutes;
