@@ -1,11 +1,11 @@
-import { NavbarComponent } from "../components/navbar/Navbar"
-import SignUpComponent from "../components/signUp/SignUpComponent"
+import { Footer, NavbarComponent, SignUpComponent } from "../components"
 
 export const SignUpPage = () => {
   return (
     <>
     <NavbarComponent />
     <SignUpComponent />
+    <Footer />
     </>
   )
 }

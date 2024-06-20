@@ -3,9 +3,8 @@ import {Button, Form} from 'react-bootstrap';
 import {useNavigate} from 'react-router-dom'
 import { createUser } from '../../api/user.fetch';
 import styled from 'styled-components';
-import { LOGIN } from '../../config/routes/paths';
 
-const SignUpComponent = () => {
+export const SignUpComponent = () => {
 	const [username, setUsername] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -66,13 +65,11 @@ const SignUpComponent = () => {
 				</Form.Group>
 
 				<Button className='form_button' type="submit">Sign Up</Button>
-				<Button className='form_button' onClick={() => navigate(LOGIN)}>Back to Login</Button>
+				<Button className='form_button' onClick={() => navigate('./login')}>Back to Login</Button>
 			</Form>
 		</FormStyles>
 	);
 };
-
-export default SignUpComponent;
 
 const FormStyles = styled.div`
 display: flex;

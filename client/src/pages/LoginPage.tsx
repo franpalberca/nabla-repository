@@ -1,11 +1,11 @@
-import LoginComponent from "../components/loginComponent/LoginComponent"
-import { NavbarComponent } from "../components/navbar/Navbar"
+import { Footer, LoginComponent, NavbarComponent } from "../components"
 
 export const LoginPage = () => {
   return (
     <>
     <NavbarComponent />
     <LoginComponent />
+    <Footer />
     </>
   )
 }

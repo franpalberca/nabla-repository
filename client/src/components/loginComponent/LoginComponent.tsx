@@ -6,7 +6,7 @@ import {useNavigate} from 'react-router-dom';
 import {SIGNUP} from '../../config/routes/paths';
 import {AuthContext} from '../../config/context/AuthContext';
 
-const LoginComponent = () => {
+export const LoginComponent = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const navigate = useNavigate();
@@ -65,8 +65,6 @@ const LoginComponent = () => {
 		</FormStyles>
 	);
 };
-
-export default LoginComponent;
 
 const FormStyles = styled.div`
 	display: flex;

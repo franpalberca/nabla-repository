@@ -1,11 +1,8 @@
 import {Request, Response} from 'express';
 import prisma from '../db/clientPrisma';
 import {uploadImage} from '../utils/cloudinary';
-import {AuthenticatedRequest} from '../types/types';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import {UploadedFile} from 'express-fileupload';
-import path from 'path';
 import fs from 'fs';
 
 const JWT_SECRET = process.env.JWT_SECRET;
