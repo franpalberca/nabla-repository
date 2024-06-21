@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1718968574410" clover="3.2.0">
-  <project timestamp="1718968574411" name="All files">
-    <metrics statements="87" coveredstatements="65" conditionals="47" coveredconditionals="30" methods="13" coveredmethods="10" elements="147" coveredelements="105" complexity="0" loc="87" ncloc="87" packages="3" files="3" classes="3"/>
+<coverage generated="1718971223246" clover="3.2.0">
+  <project timestamp="1718971223246" name="All files">
+    <metrics statements="85" coveredstatements="64" conditionals="47" coveredconditionals="30" methods="11" coveredmethods="10" elements="143" coveredelements="104" complexity="0" loc="85" ncloc="85" packages="3" files="3" classes="3"/>
     <package name="config">
       <metrics statements="8" coveredstatements="7" conditionals="10" coveredconditionals="6" methods="0" coveredmethods="0"/>
       <file name="config.ts" path="C:\Users\franp\Downloads\nabla-test\server\src\config\config.ts">
@@ -91,9 +91,9 @@
       </file>
     </package>
     <package name="utils">
-      <metrics statements="11" coveredstatements="5" conditionals="20" coveredconditionals="15" methods="3" coveredmethods="0"/>
+      <metrics statements="9" coveredstatements="4" conditionals="20" coveredconditionals="15" methods="1" coveredmethods="0"/>
       <file name="cloudinary.ts" path="C:\Users\franp\Downloads\nabla-test\server\src\utils\cloudinary.ts">
-        <metrics statements="11" coveredstatements="5" conditionals="20" coveredconditionals="15" methods="3" coveredmethods="0"/>
+        <metrics statements="9" coveredstatements="4" conditionals="20" coveredconditionals="15" methods="1" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
@@ -103,8 +103,6 @@
         <line num="16" count="0" type="stmt"/>
         <line num="18" count="0" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
       </file>
     </package>
   </project>

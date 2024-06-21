@@ -142,13 +142,9 @@ end_of_record
 TN:
 SF:src\utils\cloudinary.ts
 FN:11,uploadImage
-FN:23,(anonymous_10)
-FN:23,(anonymous_11)
-FNF:3
+FNF:1
 FNH:0
 FNDA:0,uploadImage
-FNDA:0,(anonymous_10)
-FNDA:0,(anonymous_11)
 DA:1,1
 DA:2,1
 DA:4,1
@@ -158,10 +154,8 @@ DA:13,0
 DA:16,0
 DA:18,0
 DA:19,0
-DA:23,1
-DA:24,0
-LF:11
-LH:5
+LF:9
+LH:4
 BRDA:5,0,0,1
 BRDA:5,0,1,0
 BRDA:5,1,0,1
