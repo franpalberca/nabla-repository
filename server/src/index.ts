@@ -6,7 +6,6 @@ import userRoutes from './routes/user.routes';
 import {AuthenticatedRequest} from './types/types';
 import bodyParser from 'body-parser';
 import config from './config/config';
-import * as responsesMiddleware from './middleware/responsesMiddleware';
 import baseRoute from './api/index';
 
 const APP_ORIGIN = process.env.APP_ORIGIN || 'http://localhost:5173';
@@ -21,7 +20,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(errorHandler);
-// app.use(responsesMiddleware.notFound);
 app.use('/user', userRoutes);
 const addUserToRequest = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
 	if (req.auth?.payload && typeof req.auth.payload.email === 'string') {
