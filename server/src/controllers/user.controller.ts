@@ -96,7 +96,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
 	try {
 		const allUsers = await prisma.user.findMany();
 
-		return res.status(201).send({message: 'User created successfully!', user: allUsers});
+		return res.status(201).send({message: 'Users retrieved successfully!', user: allUsers});
 	} catch (err) {
 		console.error(err);
 		return res.status(500).send({error: 'Internal server error'});
@@ -139,7 +139,7 @@ export const deleteUserById = async (req: Request, res: Response) => {
 	try {
 		const deleteUser = await prisma.user.delete({where: {userId: userId}});
 		if (!deleteUser) {
-			return res.status(204).send();
+			return res.status(404).send({message: 'User not found'});
 		}
 
 		return res.status(204).send({message: 'User deleted successfully!'});
